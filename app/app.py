@@ -30,6 +30,7 @@ external_stylesheets = [
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
+server = app.server
 
 def get_search(search_term, type_str="artist"):
 
@@ -186,4 +187,4 @@ def update_output(text, type_str):
 
 
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run_server(debug=False)
