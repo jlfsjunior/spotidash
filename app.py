@@ -16,7 +16,7 @@ import os
 spotify = spotipy.Spotify(
     client_credentials_manager=SpotifyClientCredentials(
         client_id=os.getenv('CLIENT_ID'),  # config["default"]["ClientID"],
-        client_secret=os.getenv('SECRET_ID') # config["default"]["ClientSecret"],
+        client_secret=os.getenv('CLIENT_SECRET') # config["default"]["ClientSecret"],
         # scope='user-library-read',
     )
 )
