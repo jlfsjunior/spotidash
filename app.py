@@ -11,15 +11,12 @@ import pandas as pd
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
-import configparser
-
-config = configparser.ConfigParser()
-config.read("app.cfg")
+import os
 
 spotify = spotipy.Spotify(
     client_credentials_manager=SpotifyClientCredentials(
-        client_id=config["default"]["ClientID"],
-        client_secret=config["default"]["ClientSecret"],
+        client_id=os.getenv('CLIENT_ID'),  # config["default"]["ClientID"],
+        client_secret=os.getenv('SECRET_ID') # config["default"]["ClientSecret"],
         # scope='user-library-read',
     )
 )
