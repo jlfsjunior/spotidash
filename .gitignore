@@ -1,0 +1,8 @@
+app.cfg
+
+# caches
+__pycache__
+.cache
+
+# dev settings
+.vscode
