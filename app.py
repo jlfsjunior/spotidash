@@ -29,6 +29,8 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 server = app.server
 
+app.title = "Spotidash"
+
 def get_search(search_term, type_str="artist"):
 
     results = spotify.search(q=type_str + ":" + search_term, type=type_str)
