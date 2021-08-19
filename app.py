@@ -30,7 +30,11 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 
 app.layout = html.Div(
-    html.H2("Test")
+    [
+        html.H2("Test"),
+        dbc.Button(id="button", children="Test"),
+        html.Div(id="test")
+    ]
 )
 
 def get_search(search_term, type_str="artist"):
@@ -169,6 +173,15 @@ def _get_url(item):
 #         inverse=True,
 #         style={"width": "18rem"},
 #     )
+
+
+@app.callback(
+    Output("test", "children"),
+    Input("button", "nClicks"),
+)
+def update(n_clicks):
+    return n_clicks
+
 
 
 # @app.callback(
