@@ -29,14 +29,6 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 server = app.server
 
-app.layout = html.Div(
-    [
-        html.H2("Test"),
-        dbc.Button(id="button", children="Test"),
-        html.Div(id="test")
-    ]
-)
-
 def get_search(search_term, type_str="artist"):
 
     results = spotify.search(q=type_str + ":" + search_term, type=type_str)
@@ -82,121 +74,110 @@ def _get_url(item):
     if "external_urls" in item:
         return item['external_urls']['spotify']
 
-# app.layout = html.Div(
-#     children=[
-#         dbc.Row(
-#             dbc.Col(
-#                 html.H1(children="Hello Spotidash!"),
-#                 width={
-#                     'size': 'auto'
-#                 },
-#             ),
-#             justify='center',
-#             style={
-#                 'margin': '25px',
-#             }
-#         ),
-#         dbc.Row(
-#             dbc.Col(
-#                 html.Div(
-#                     [
-#                         dcc.Textarea(
-#                             id="textarea", 
-#                             style={"width": "100%"},
-#                         ),
-#                         dbc.RadioItems(
-#                             id="radio",
-#                             options=[
-#                                 {"label": "Artist", "value": "artist"},
-#                                 {"label": "Track", "value": "track"},
-#                                 {"label": "Album", "value": "album"},
-#                                 {"label": "Show", "value": "show"},
-#                                 {"label": "Playlist", "value": "playlist"},
-#                                 {"label": "Episode", "value": "episode"},
-#                             ],
-#                             value="artist",
-#                             inline=True,
-#                             style={"width": "100%"},
-#                         ),
-#                     ]
-#                 ),
-#                 width = {
-#                     'size': 6,
-#                     'offset': 3,
-#                 }
-#             ),
-#         ),
+app.layout = html.Div(
+    children=[
+        dbc.Row(
+            dbc.Col(
+                html.H1(children="Hello Spotidash!"),
+                width={
+                    'size': 'auto'
+                },
+            ),
+            justify='center',
+            style={
+                'margin': '25px',
+            }
+        ),
+        dbc.Row(
+            dbc.Col(
+                html.Div(
+                    [
+                        dcc.Textarea(
+                            id="textarea", 
+                            style={"width": "100%"},
+                        ),
+                        dbc.RadioItems(
+                            id="radio",
+                            options=[
+                                {"label": "Artist", "value": "artist"},
+                                {"label": "Track", "value": "track"},
+                                {"label": "Album", "value": "album"},
+                                {"label": "Show", "value": "show"},
+                                {"label": "Playlist", "value": "playlist"},
+                                {"label": "Episode", "value": "episode"},
+                            ],
+                            value="artist",
+                            inline=True,
+                            style={"width": "100%"},
+                        ),
+                    ]
+                ),
+                width = {
+                    'size': 6,
+                    'offset': 3,
+                }
+            ),
+        ),
 
-#         dbc.Row(
-#             dbc.Col(
-#                 dbc.CardDeck(id="test"),
-#             ),
-#         ),
-#     ],
-#     style={
-#         'margin': '0 25px',
-#     }
-# )
+        dbc.Row(
+            dbc.Col(
+                dbc.CardDeck(id="test"),
+            ),
+        ),
+    ],
+    style={
+        'margin': '0 25px',
+    }
+)
 
 
-# def make_card(item):
+def make_card(item):
 
-#     print(item)
+    if "artists" in item:
+        txt = "Artist: " + item["artists"][0]["name"]
+    else:
+        txt = ""
 
-#     if "artists" in item:
-#         txt = "Artist: " + item["artists"][0]["name"]
-#     else:
-#         txt = ""
-
-#     return dbc.Card(
-#         [
-#             dbc.CardImg(src=item["image"], top=True),
-#             dbc.CardBody(
-#                 [
-#                     html.H4(item["name"], className="card-title"),
-#                     html.A(
-#                         item["name"],
-#                         href=item["url"],
-#                         target="_blank",
-#                     ),
-#                     html.P(
-#                         [
-#                             f"Popularity: {item['popularity']}",
-#                             txt,
-#                         ],
-#                         className="card-text",
-#                     ),
-#                 ]
-#             ),
-#         ],
-#         color="dark",
-#         inverse=True,
-#         style={"width": "18rem"},
-#     )
+    return dbc.Card(
+        [
+            dbc.CardImg(src=item["image"], top=True),
+            dbc.CardBody(
+                [
+                    html.H4(item["name"], className="card-title"),
+                    html.A(
+                        item["name"],
+                        href=item["url"],
+                        target="_blank",
+                    ),
+                    html.P(
+                        [
+                            f"Popularity: {item['popularity']}",
+                            txt,
+                        ],
+                        className="card-text",
+                    ),
+                ]
+            ),
+        ],
+        color="dark",
+        inverse=True,
+        style={"width": "18rem"},
+    )
 
 
 @app.callback(
     Output("test", "children"),
-    Input("button", "nClicks"),
+    Input("textarea", "value"),
+    Input("radio", "value"),
 )
-def update(n_clicks):
-    return n_clicks
+def update_output(text, type_str):
 
+    if text is None:
+        return "Please type something..."
 
+    val = get_search(text, type_str=type_str)
 
-# @app.callback(
-#     Output("test", "children"),
-#     Input("textarea", "value"),
-#     Input("radio", "value"),
-# )
-# def update_output(text, type_str):
-
-#     if text is None:
-#         return "Please type something..."
-
-#     val = get_search(text, type_str=type_str)
-
-#     return [make_card(i) for i in val]
+    return [make_card(i) for i in val]
 
 
 if __name__ == "__main__":
