@@ -2,6 +2,13 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 
+page_list = [
+    {"title": "Home", "href": "/"},
+    {"title": "Search", "href": "/search"},
+    {"title": "Track Insights", "href": "/insights"},
+    {"title": "Artists Insights", "href": "/artists-insights"},
+]
+
 index_page = html.Div(
     children=[
         dbc.Row(
@@ -14,15 +21,12 @@ index_page = html.Div(
             justify='center',
         ),
         dbc.Row(
-            dbc.Col(
-                [
-                    dcc.Link("Home", href="/"),
-                    dcc.Link("Search", href="/search"),
-                    dcc.Link("Track Insights", href="/insights"),
-                    dcc.Link("Artists Insights", href="/artists-insights"),
-                ]
-            ),
-            justify='center',
+            [
+                dbc.Col(
+                    dcc.Link(page["title"], href=page["href"])
+                ) for page in page_list
+            ],
+            justify='between',
         )
     ]
 )
