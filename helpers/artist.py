@@ -10,7 +10,7 @@ def _parse_artist(item):
         'popularity' : item['popularity'],
         'followers' : item['followers']['total'],
         'url': item['external_urls']['spotify'],
-        'image': item['images'][0]['url'],
+        'image': _get_first_image(item['images']),
     }
 
 def _parse_track(item):
@@ -23,8 +23,14 @@ def _parse_track(item):
         'duration_ms' : item['duration_ms'],
         'explicit' : item['explicit'],
         'url': item['external_urls']['spotify'],
-        'image': item['images'][0]['url'],
+        'image': _get_first_image(item['images']),
     }
+
+def _get_first_image(images_list):
+    if len(images_list) == 0:
+        return None
+    else:
+        return images_list[0]['url']
 
 def get_related_artist(artist_id):
         
