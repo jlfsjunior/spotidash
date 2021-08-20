@@ -29,10 +29,11 @@ def _parse_track(item):
 def get_related_artist(artist_id):
         
     res = spotify.artist_related_artists(artist_id)
+    
+    related_artists = res['artists']
+    related_artists = [ _parse_artist(i) for i in related_artists]
 
-    res = [ _parse_artist(i) for i in res]
-
-    df = pd.DataFrame(res)
+    df = pd.DataFrame(related_artists)
 
     return df
 
