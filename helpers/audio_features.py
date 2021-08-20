@@ -10,7 +10,6 @@ def get_track_df(artist_query):
         "id": t["id"],
         "name": t["name"],
         "disc_number": t["disc_number"],
-        "duration_ms": t["duration_ms"],
         "explicit": t["explicit"],
     } for t in tracks]).set_index("id")
 
