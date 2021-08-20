@@ -12,6 +12,7 @@ from pages.index import index_page
 from pages.not_found import not_found_page
 from pages.search import search_page
 from pages.insights import insights_page
+from pages.artists_insights import artists_insights_page
 
 app.layout = html.Div([
     dcc.Location(id="url", refresh=False),
@@ -39,6 +40,8 @@ def display_page(pathname):
         return search_page
     elif pathname == "/insights":
         return insights_page
+    elif pathname == "/artists_insights":
+        return artists_insights_page
     else:
         return not_found_page
 
