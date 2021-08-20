@@ -107,7 +107,7 @@ def update_insights_table(artist, sortby, ascending):
     df = ( get_track_df(artist)
         .sort_values(sortby, ascending=ascending)
         .drop_duplicates(
-            subset=["name", "duration_ms_x"],
+            subset=["name", "duration_ms"],
             keep="last",
         )
     )
