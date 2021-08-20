@@ -40,7 +40,7 @@ def display_page(pathname):
         return search_page
     elif pathname == "/insights":
         return insights_page
-    elif pathname == "/artists_insights":
+    elif pathname == "/artists-insights":
         return artists_insights_page
     else:
         return not_found_page
