@@ -27,6 +27,8 @@ app.layout = html.Div([
 app.validation_layout = html.Div([
     index_page,
     search_page,
+    insights_page,
+    artists_insights_page,
     not_found_page,
 ])
 
