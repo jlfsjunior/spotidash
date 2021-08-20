@@ -1,3 +1,4 @@
+import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 
@@ -12,5 +13,16 @@ index_page = html.Div(
             ),
             justify='center',
         ),
+        dbc.Row(
+            dbc.Col(
+                [
+                    dcc.Link("Home", href="/"),
+                    dcc.Link("Search", href="/search"),
+                    dcc.Link("Track Insights", href="/insights"),
+                    dcc.Link("Artists Insights", href="/artists-insights"),
+                ]
+            ),
+            justify='center',
+        )
     ]
 )
