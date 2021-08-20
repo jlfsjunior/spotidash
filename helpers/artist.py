@@ -1,4 +1,4 @@
-from spotify import spotify
+from .spotify import spotify
 import pandas as pd
 
 def _parse_artist(item):
