@@ -13,3 +13,10 @@ def test_app001_run(dash_duo):
 
     assert True, "Boilerplate"
 
+def test_app002_load_search(dash_duo):
+
+    dash_duo.start_server(app)
+
+    dash_duo.wait_for_page('/search', timeout=5)
+
+    assert dash_duo.get_url() == dash_duo.server_url + '/search', "Page not loaded"
