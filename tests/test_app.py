@@ -19,4 +19,8 @@ def test_app002_load_search(dash_duo):
 
     dash_duo.wait_for_page(dash_duo.server_url + '/search', timeout=5)
 
-    assert dash_duo.get_url() == dash_duo.server_url + '/search', "Page not loaded"
+    test = dash_duo.find_element("#test")
+
+    print(test)
+
+    assert len(test) > 0, "Page not loaded"
