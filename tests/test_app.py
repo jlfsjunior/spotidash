@@ -22,3 +22,4 @@ def test_app002_load_search(dash_duo):
     test = dash_duo.find_element("#test")
 
     assert test.get_attribute("id") == "test", "Page not loaded"
+    assert dash_duo.get_logs() == [], "Logs are not empty"
