@@ -13,7 +13,7 @@ def test_app001_load_search(dash_duo):
     assert test.get_attribute("id") == "test", "Page not loaded"
     assert dash_duo.get_logs() == [], "Logs are not empty"
 
-def test_app002_(dash_duo):
+def test_app002_trigger_cards(dash_duo):
 
     dash_duo.start_server(app)
 
