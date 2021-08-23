@@ -21,6 +21,4 @@ def test_app002_load_search(dash_duo):
 
     test = dash_duo.find_element("#test")
 
-    print(test)
-
-    assert len(test) > 0, "Page not loaded"
+    assert test.get_attribute("id") == "test", "Page not loaded"
