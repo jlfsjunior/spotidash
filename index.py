@@ -14,7 +14,7 @@ from pages.search import search_page
 from pages.insights import insights_page
 from pages.artists_insights import artists_insights_page
 
-app.layout = html.Div([
+_layout = html.Div([
     dcc.Location(id="url", refresh=False),
     html.Div(
         id="page-content",
@@ -24,7 +24,10 @@ app.layout = html.Div([
     ),
 ])
 
+app.layout = _layout
+
 app.validation_layout = html.Div([
+    _layout, 
     index_page,
     search_page,
     insights_page,
@@ -49,4 +52,4 @@ def display_page(pathname):
 
 
 if __name__ == "__main__":
-    app.run_server(debug=False)
+    app.run_server(debug=True)
